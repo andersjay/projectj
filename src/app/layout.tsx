@@ -1,3 +1,4 @@
+import { MenuIsOpenProvider } from '@/contexts/MenuIsOpen'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -15,7 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <MenuIsOpenProvider>
+        <body className={inter.className}>{children}</body>
+      </MenuIsOpenProvider>
     </html>
   )
 }
