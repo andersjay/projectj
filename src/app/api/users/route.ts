@@ -6,15 +6,23 @@ import dayjs from 'dayjs'
 
 export async function POST(request: Request) {
 
-
     const { name, plate } = await request.json()
 
-    console.log(name, plate)
+    const generateRandomCode = () => {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; // Caracteres permitidos
+        let code = '';
+        for (let i = 0; i < 4; i++) {
+          const randomIndex = Math.floor(Math.random() * chars.length);
+          code += chars[randomIndex];
+        }
+        return code;
+      };
 
     const user = await prisma.user.create({
         data: {
             id: uuidv4(),
             name,
+            code: generateRandomCode(),
             plate,
             status: 'waiting',
             createdAt: dayjs().toDate(),

@@ -10,6 +10,7 @@ interface User {
   createdAt: string;
   updatedAt: string;
   status: string;
+  code: string;
 }
 
 interface Users {
@@ -40,21 +41,23 @@ export default function Dashboard({ data }: Users) {
       <table className="table-auto my-4 ">
         <thead>
           <tr className="">
-            <th className="text-lg">Nome</th>
-            <th className="text-lg">Placa</th>
-            <th className="text-lg">Entrada</th>
-            <th className="text-lg">Saída</th>
-            <th className="text-lg">Status</th>
+            <th className="text-lg p-2">Código</th>
+            <th className="text-lg p-2">Nome</th>
+            <th className="text-lg p-2">Placa</th>
+            <th className="text-lg p-2">Entrada</th>
+            <th className="text-lg p-2">Saída</th>
+            <th className="text-lg p-2">Status</th>
           </tr>
         </thead>
         <tbody>
           {users.map(user => (
             <tr className="border-b-2" key={user.createdAt}>
-              <td className="text-lg">{user.name}</td>
-              <td className="text-lg">{user.plate}</td>
-              <td className="text-lg">{user.createdAt}</td>
-              <td className="text-lg">{user.updatedAt}</td>
-              <td className="text-lg">{user.status}</td>
+              <td className="text-lg p-2">{user.code}</td>
+              <td className="text-lg p-2">{user.name}</td>
+              <td className="text-lg p-2">{user.plate}</td>
+              <td className="text-lg p-2">{user.createdAt}</td>
+              <td className="text-lg p-2">{user.updatedAt}</td>
+              <td className="text-lg p-2">{user.status}</td>
             </tr>
           ))}
 
