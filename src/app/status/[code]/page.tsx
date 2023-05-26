@@ -1,38 +1,65 @@
 "use client";
-import { useRouter } from 'next/router'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TbHourglassHigh } from "react-icons/tb";
 import { AiOutlineClear, AiOutlineCheck } from "react-icons/ai";
 import classNames from "classnames";
+import { get } from "http";
 
 interface StatusProps {
-  status: 'default' | 'waiting' | 'inProgress' | 'finished';
+  status?: 'default' | 'waiting' | 'inProgress' | 'finished';
 }
 
-export default function Search() {
+interface Props {
+  searchParams?:{
+    code: string; 
+  },
+  params?:{
+    code: string;
+  }
+}
+
+interface UserProps{
+  name?: string;
+  plate?: string;
+  status?: "default" | "waiting" | "inProgress" | "finished";
+  id?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  code?: string;
+}
+
+
+
+export default function Search(params: Props) {
   const [status, setStatus] = useState<StatusProps>({ status: 'waiting' });
-  const router = useRouter();
-  const { query } = router;
+  const [user, setUser] = useState<UserProps | null>(null)
 
-  console.log(query)
+  const code = params?.params?.code
+
+  async function getUser(){
+    const response = await fetch(`http://localhost:3000/api/status/${code}`)
+    const data = await response.json()
+
+    if (!data) {
+      alert('Usuário não encontrado')
+      return
+    }
+    setUser(data)
+  }
+
+  function changeStatus(status: StatusProps) {
+    setStatus(status)
+  }
 
 
-  // Função para atualizar o status para 'em andamento'
-  const waiting = () => {
-    setStatus({ status: 'waiting' });
-  };
+  useEffect(() => {
+    getUser()
+    changeStatus({ status: user?.status})
+  }, [])
 
-  // Função para atualizar o status para 'em andamento'
-  const startProgress = () => {
-    setStatus({ status: 'inProgress' });
+  console.log(user?.status)
 
-
-  };
-
-  // Função para atualizar o status para 'finalizado'
-  const finishProgress = () => {
-    setStatus({ status: 'finished' });
-  };
+  
 
   // Função para mostrar o status atual
   const showStatus = (status: StatusProps) => {
@@ -44,12 +71,14 @@ export default function Search() {
     return status.status;
   }
 
-  console.log(status.status)
+  console.log(user)
+
+
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h2 className="font-bold text-2xl">Anderson Leite</h2>
-      <span className="text-lg mb-2">Placa: AEA2-111</span>
+      <h2 className="font-bold text-2xl">{user?.name}</h2>
+      <span className="text-lg mb-2">Placa: {user?.plate}</span>
       <div className="w-[400px] bg-zinc-300 p-4 rounded">
         <div className="w-full flex items-center justify-center gap-2">
           <div className={classNames(`rounded-full w-[40px] h-[40px] flex items-center justify-center bg-green-500  `)}>
@@ -69,10 +98,11 @@ export default function Search() {
       </div>
 
       <span>
-        <h2 className="mt-3 text-lg">Status: {showStatus(status)} </h2>
+        <h2 className="mt-3 text-lg">Status: {showStatus({status: user?.status})} </h2>
       </span>
 
     </main>
   );
 }
 
+export const dynamic = 'force-dynamic'
