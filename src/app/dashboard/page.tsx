@@ -33,15 +33,14 @@ export default function Dashboard({ data }: Users) {
 
   async function handleStatusChange(event: ChangeEvent<HTMLSelectElement>, code: string) {
 
-    console.log(event.target.value, code)
-
-    const response = await fetch(`http://localhost:3000/api/users/${code}`, {
+    const response = await fetch(`http://localhost:3000/api/status/${code}`, {
       method: 'POST',
       body: JSON.stringify({
         status: event.target.value
         
       })
     })
+
 
     return response.json()
     
@@ -57,7 +56,7 @@ export default function Dashboard({ data }: Users) {
   return (
     <Layout>
 
-      <h1 className="text-2xl">Clientess</h1>
+      <h1 className="text-2xl">Clientes</h1>
 
       <div className="overflow-x-auto">
         <table className="table-auto my-4 md:table-fixed">
@@ -80,10 +79,10 @@ export default function Dashboard({ data }: Users) {
                 <td className="text-lg p-2">{dayjs(user.createdAt).format("DD/MM HH:mm") + "h"}</td>
                 <td className="text-lg p-2">{dayjs(user.updatedAt).format("DD/MM HH:mm") + "h"}</td>
                 <td className="text-lg p-2">
-                  <select value={user.status} onChange={(e)=> {handleStatusChange(e,user.code)}} className='bg-transparent'>
-                    <option className='bg-primary' value="waiting">Aguardando</option>
-                    <option className='bg-primary' value="inProgress">Em progresso</option>
-                    <option className='bg-primary' value="finished">Finalizado</option>
+                  <select onChange={(e)=>{handleStatusChange(e, user.code)}} className='bg-transparent'>
+                    <option className='bg-primary' selected={user.status == 'waiting' ? true : false } value="waiting">Aguardando</option>
+                    <option className='bg-primary' selected={user.status == 'inProgress' ? true : false } value="inProgress">Em progresso</option>
+                    <option className='bg-primary' selected={user.status == 'finished' ? true : false } value="finished">Finalizado</option>
                   </select>
                 </td>
               </tr>
@@ -96,11 +95,3 @@ export default function Dashboard({ data }: Users) {
     </Layout>
   )
 }
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch('http:localhost:3000/api/users');
-  const data = await res.json();
-
-  console.log(data)
-  return { props: { data } };
-};

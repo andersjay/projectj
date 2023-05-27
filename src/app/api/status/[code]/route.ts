@@ -13,9 +13,22 @@ export async function GET(request: Request, { params }: { params: { code: string
     }
   })
 
+  return NextResponse.json(user)
+}
 
+export async function POST(request: Request, { params }: { params: { code: string } }){
+
+  const code = params.code
+  const { status } = await request.json()
+
+  const user = await prisma.user.update({
+    where: {
+      code
+    },
+    data: {
+      status
+    }
+  })
 
   return NextResponse.json(user)
-
-
 }

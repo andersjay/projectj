@@ -20,10 +20,16 @@ export default function Create() {
   })
 
   async function handleCreateUser(data: UserSchemaForm) {
-    await fetch('/api/users', {
+    const user = await fetch('/api/users', {
       method: 'POST',
       body: JSON.stringify(data)
     })
+    
+    if(!user){
+      return alert('Erro ao cadastrar usuário')
+    }
+
+    redirect('/dashboard')
 
   }
 
