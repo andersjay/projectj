@@ -1,10 +1,7 @@
 {
   "version": 2,
   "builds": [
-    { "src": "package.json", "use": "@vercel/node" }
-  ],
-  "routes": [
-    { "src": "/.*", "dest": "/page.tsx" }
+    { "src": "package.json", "use": "@vercel/next" }
   ],
   "env": {
     "PRISMA_FORCE_NAPI": "true"
