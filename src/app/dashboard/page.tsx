@@ -32,14 +32,18 @@ export default function Dashboard({ data }: Users) {
   }
 
   async function handleStatusChange(event: ChangeEvent<HTMLSelectElement>, code: string) {
+
+    console.log(event.target.value, code)
+
     const response = await fetch(`http://localhost:3000/api/users/${code}`, {
       method: 'POST',
       body: JSON.stringify({
         status: event.target.value
+        
       })
     })
 
-    handleFetch()
+    return response.json()
     
   }
 
@@ -76,10 +80,10 @@ export default function Dashboard({ data }: Users) {
                 <td className="text-lg p-2">{dayjs(user.createdAt).format("DD/MM HH:mm") + "h"}</td>
                 <td className="text-lg p-2">{dayjs(user.updatedAt).format("DD/MM HH:mm") + "h"}</td>
                 <td className="text-lg p-2">
-                  <select value={user.status} onChange={handleStatusChange}>
-                    <option value="waiting">Aguardando</option>
-                    <option value="inProgress">Em progresso</option>
-                    <option value="finished">Finalizado</option>
+                  <select value={user.status} onChange={(e)=> {handleStatusChange(e,user.code)}} className='bg-transparent'>
+                    <option className='bg-primary' value="waiting">Aguardando</option>
+                    <option className='bg-primary' value="inProgress">Em progresso</option>
+                    <option className='bg-primary' value="finished">Finalizado</option>
                   </select>
                 </td>
               </tr>

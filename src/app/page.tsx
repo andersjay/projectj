@@ -2,7 +2,6 @@
 import Image from 'next/image'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'
-import '@tamagui/core/reset.css'
 
 export default function Home() {
 
@@ -29,9 +28,10 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
+      <Image src='/logo.jpg' width={150} height={150} alt="Logo Ao Chavilha" className='mb-4'/>
       <form onSubmit={handleSearch}>
         <div className='w-[300px]'>
-          <input type="text" placeholder='Digite sua placa' className='p-2 bg-zinc-400 placeholder:text-zinc-700 text-zinc-900 rounded-md w-full outline-none focus:outline-primary outline-offset-0' value={code} onChange={(e) => setCode(e.currentTarget.value)} />
+          <input type="text" placeholder='Digite seu código' className='p-2 bg-zinc-400 placeholder:text-zinc-700 text-zinc-900 rounded-md w-full outline-none focus:outline-primary outline-offset-0' value={code} onChange={(e) => setCode(e.currentTarget.value)} />
         </div>
 
         <div className='w-[300px]'>

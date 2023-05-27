@@ -31,7 +31,7 @@ interface UserProps{
 
 
 export default function Search(params: Props) {
-  const [status, setStatus] = useState<StatusProps>({ status: 'waiting' });
+  const [status, setStatus] = useState<StatusProps>({ status: 'default' });
   const [user, setUser] = useState<UserProps | null>(null)
 
   const code = params?.params?.code
@@ -71,7 +71,7 @@ export default function Search(params: Props) {
     return status.status;
   }
 
-  console.log(user)
+  console.log(status.status)
 
 
 
@@ -84,7 +84,7 @@ export default function Search(params: Props) {
           <div className={classNames(`rounded-full w-[40px] h-[40px] flex items-center justify-center bg-green-500  `)}>
             <TbHourglassHigh size={24} color="white" />
           </div>
-          <div className={classNames(`w-1/4 h-2 rounded ${status.status == 'waiting' ? 'bg-slate-500' : 'bg-green-500'}`)}></div>
+          <div className={classNames(`w-1/4 h-2 rounded ${status.status == 'waiting' ? 'bg-green-500' : 'bg-slate-500'}`)}></div>
 
           <div className={classNames(`rounded-full w-[40px] h-[40px] flex items-center justify-center ${status.status === 'inProgress' || status.status === 'finished' ? 'bg-green-500' : 'border-2 border-slate-700 bg-slate-500'}`)}>
             <AiOutlineClear size={24} color="white" />
