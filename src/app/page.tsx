@@ -12,7 +12,7 @@ export default function Home() {
     e.preventDefault();
 
     //Verificar se a placa existe no banco de dados
-    const response = await fetch(`http://localhost:3000/api/status/${code}`)
+    const response = await fetch(`api/status/${code}`)
     const data = await response.json()
 
     if (!data) {
