@@ -3,8 +3,6 @@ import { Layout } from "@/components/Layout";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
-import { redirect } from 'next/navigation'
-import { useRouter } from "next/router";
 
 const userSchemaForm = z.object({
   name: z.string().min(3, 'O nome precisa ter no mínimo 3 caracters').max(255),
@@ -20,8 +18,6 @@ export default function Create() {
     resolver: zodResolver(userSchemaForm)
   })
 
-  const { push } = useRouter()
-
   async function handleCreateUser(data: UserSchemaForm) {
     const user = await fetch('/api/users', {
       method: 'POST',
@@ -32,8 +28,7 @@ export default function Create() {
       return alert('Erro ao cadastrar usuário')
     }
 
-    push('/dashboard')
-
+    window.location.href = '/dashboard'
   }
 
   return (
