@@ -57,7 +57,7 @@ export default function Dashboard({ data }: Users) {
   return (
     <Layout>
 
-      <h1 className="text-2xl">Clientes</h1>
+      <h1 className="text-2xl">Clientess</h1>
 
       <div className="overflow-x-auto">
         <table className="table-auto my-4 md:table-fixed">
