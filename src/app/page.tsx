@@ -16,7 +16,7 @@ export default function Home() {
     const data = await response.json()
 
     if (!data) {
-      alert('Usuário não encontrado')
+      alert('Usuário não encontrado :/')
       return
     }
 
