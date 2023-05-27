@@ -15,11 +15,7 @@ interface User {
   code: string;
 }
 
-interface Users {
-  data: User[];
-}
-
-export default function Dashboard({ data }: Users) {
+export default function Dashboard() {
 
   const [users, setUsers] = useState<User[]>([])
 
