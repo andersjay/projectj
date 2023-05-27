@@ -4,11 +4,11 @@ const nextConfig = {
     return [
       {
         source: '/api/status/:code/(.*)',
-        destination: '/api/status/[code]/route.ts',
+        destination: '/src/app/api/status/[code]/route.ts',
       },
       {
         source: '/api/users/(.*)',
-        destination: '/api/users/route.ts',
+        destination: '/src/app/api/users/route.ts',
       },
       // Adicione outras regras de roteamento para suas rotas handlers aqui
     ];
