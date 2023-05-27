@@ -28,7 +28,7 @@ interface UserProps {
   code?: string;
 }
 
-
+export const apiurl = process.env.NEXT_PUBLIC_API_URL
 
 export default function Search(params: Props) {
   const [status, setStatus] = useState<StatusProps>({ status: 'default' });
@@ -40,7 +40,7 @@ export default function Search(params: Props) {
   async function getUser() {
     setIsLoading(true)
     try {
-      const response = await fetch(`api/status/${code}`)
+      const response = await fetch(`${apiurl}/status/${code}`)
       const data = await response.json()
 
       if (!data) {

@@ -5,6 +5,7 @@ import { Sidebar } from "@/components/Sidebar";
 import dayjs from "dayjs";
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
+import { apiurl } from '../status/[code]/page';
 
 interface User {
   name: string;
@@ -21,7 +22,7 @@ export default function Dashboard() {
 
 
   async function handleFetch() {
-    const response = await fetch(`api/users`, {
+    const response = await fetch(`${apiurl}/users`, {
       method: 'GET',
     })
 
@@ -30,7 +31,7 @@ export default function Dashboard() {
 
   async function handleStatusChange(event: ChangeEvent<HTMLSelectElement>, code: string) {
 
-    const response = await fetch(`api/status/${code}`, {
+    const response = await fetch(`${apiurl}/status/${code}`, {
       method: 'POST',
       body: JSON.stringify({
         status: event.target.value
