@@ -13,12 +13,23 @@ export async function GET(request: Request, { params }: { params: { code: string
     }
   })
 
-  return NextResponse.json(user)
+  return NextResponse.json(user,{
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-cache",
+    }
+  })
 }
 
 export async function POST(request: Request, { params }: { params: { code: string } }){
 
   const code = params.code
+
+  
+
   const { status } = await request.json()
 
   const user = await prisma.user.update({
@@ -30,5 +41,13 @@ export async function POST(request: Request, { params }: { params: { code: strin
     }
   })
 
-  return NextResponse.json(user)
+  return NextResponse.json(user,{
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-cache",
+    }
+  })
 }

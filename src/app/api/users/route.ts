@@ -30,7 +30,15 @@ export async function POST(request: Request) {
         }
     })
 
-    return NextResponse.json(user)
+    return NextResponse.json(user,{
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache",
+          }
+    })
 
 }
 
@@ -43,7 +51,15 @@ export async function GET() {
         }
     })
 
-    return NextResponse.json(users)
+    return NextResponse.json(users,{
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache",
+          }
+    })
 
 
 }
