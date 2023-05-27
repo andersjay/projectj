@@ -3,7 +3,6 @@ import { Layout } from "@/components/Layout";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
-import { apiurl } from "@/app/status/[code]/page";
 
 const userSchemaForm = z.object({
   name: z.string().min(3, 'O nome precisa ter no mínimo 3 caracters').max(255),
@@ -21,7 +20,7 @@ export default function Create() {
   })
 
   async function handleCreateUser(data: UserSchemaForm) {
-    const user = await fetch(`${apiurl}/users`, {
+    const user = await fetch(`api/users`, {
       method: 'POST',
       body: JSON.stringify(data)
     })
