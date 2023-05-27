@@ -11,6 +11,7 @@ const userSchemaForm = z.object({
 
 type UserSchemaForm = z.infer<typeof userSchemaForm>
 
+const api = process.env.NEXT_PUBLIC_API_URL
 
 export default function Create() {
 
@@ -19,7 +20,7 @@ export default function Create() {
   })
 
   async function handleCreateUser(data: UserSchemaForm) {
-    const user = await fetch('/api/users', {
+    const user = await fetch('api/users', {
       method: 'POST',
       body: JSON.stringify(data)
     })

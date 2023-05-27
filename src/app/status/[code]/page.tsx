@@ -40,7 +40,7 @@ export default function Search(params: Props) {
   async function getUser() {
     setIsLoading(true)
     try {
-      const response = await fetch(`http://localhost:3000/api/status/${code}`)
+      const response = await fetch(`api/status/${code}`)
       const data = await response.json()
 
       if (!data) {

@@ -19,8 +19,9 @@ export default function Dashboard() {
 
   const [users, setUsers] = useState<User[]>([])
 
+
   async function handleFetch() {
-    const response = await fetch('http://localhost:3000/api/users', {
+    const response = await fetch(`api/users`, {
       method: 'GET',
     })
 
@@ -29,7 +30,7 @@ export default function Dashboard() {
 
   async function handleStatusChange(event: ChangeEvent<HTMLSelectElement>, code: string) {
 
-    const response = await fetch(`http://localhost:3000/api/status/${code}`, {
+    const response = await fetch(`api/status/${code}`, {
       method: 'POST',
       body: JSON.stringify({
         status: event.target.value
