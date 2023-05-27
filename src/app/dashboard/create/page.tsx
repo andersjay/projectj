@@ -39,7 +39,7 @@ export default function Create() {
   return (
     <Layout>
       <div className="flex flex-col md:items-center">
-        <h2 className="mt-2 text-2xl">Cadastrar</h2>
+        <h2 className="mt-2 text-2xl">Cadastrar usuário</h2>
 
         <form className="mt-4 flex flex-col gap-4 md:w-[600px]" onSubmit={handleSubmit(handleCreateUser)}>
           <div className="w-full">
