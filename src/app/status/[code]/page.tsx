@@ -28,6 +28,8 @@ interface UserProps {
   code?: string;
 }
 
+
+
 export default function Search(params: Props) {
   const [status, setStatus] = useState<StatusProps>({ status: 'default' });
   const [user, setUser] = useState<UserProps | null>(null)
@@ -38,7 +40,7 @@ export default function Search(params: Props) {
   async function getUser() {
     setIsLoading(true)
     try {
-      const response = await fetch(`api/${code}`)
+      const response = await fetch(`http://localhost:3000/api/status/${code}`)
       const data = await response.json()
 
       if (!data) {
