@@ -20,12 +20,12 @@ export default function Create() {
   })
 
   async function handleCreateUser(data: UserSchemaForm) {
-    const user = await fetch(`api/users`, {
+    const user = await fetch(`/api/users`, {
       method: 'POST',
       body: JSON.stringify(data)
     })
-    
-    if(!user){
+
+    if (!user) {
       return alert('Erro ao cadastrar usuário')
     }
 
@@ -33,11 +33,14 @@ export default function Create() {
   }
 
   return (
-    <Layout>
+    <div className="mx-auto flex justify-center h-screen md:w-[1440px] py-10">
       <div className="flex flex-col md:items-center">
-        <h2 className="mt-2 text-2xl">Cadastrar usuário</h2>
 
         <form className="mt-4 flex flex-col gap-4 md:w-[600px]" onSubmit={handleSubmit(handleCreateUser)}>
+          <div className="flex items-center  justify-between gap-2 w-full">
+            <h2 className="text-zinc-100 font-semibold">Cadastrar cliente</h2>
+            <a href='/dashboard' className="bg-[#343352] hover:bg-[#46446e] px-4 py-3 rounded-md text-white font-semibold tracking-wide cursor-pointer">Voltar</a>
+          </div>
           <div className="w-full">
             <label
               htmlFor="name"
@@ -70,10 +73,10 @@ export default function Create() {
           <div className="w-full">
             <button
               type="submit"
-              className="bg-slate-900 mt-4 w-full p-2 rounded-md transition-colors hover:bg-slate-800">Cadastrar</button>
+              className="bg-[#343352] hover:bg-[#46446e] mt-4 w-full p-2 rounded-md transition-colors">Cadastrar</button>
           </div>
         </form>
       </div>
-    </Layout>
+    </div>
   )
 }

@@ -28,7 +28,6 @@ export async function POST(request: Request, { params }: { params: { code: strin
 
   const code = params.code
 
-  
 
   const { status } = await request.json()
 
