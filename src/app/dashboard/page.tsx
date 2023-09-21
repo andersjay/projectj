@@ -163,7 +163,7 @@ export default function Dashboard() {
                 {users.map(user => {
                   return (
 
-                    <div className="bg-zinc-700 rounded-md px-6 py-3  text-zinc-200 h-36 my-4 md:w-full" key={user.code}>
+                    <div className="bg-zinc-700 rounded-md px-6 py-3 h-full text-zinc-200 h-36 my-4 md:w-full" key={user.code}>
                       <div className='flex gap-2  items-center w-full'>
                         <span className='text-xl font-bold'>{user.name}</span>
                         |
@@ -182,7 +182,7 @@ export default function Dashboard() {
                         <span className='text-md'><span className='text-sm text-yellow-300'>Telefone </span>{user.phone}</span>
                       </div>
 
-                      <div className='w-full flex gap-2 md:justify-center'>
+                      <div className='w-full flex gap-2 md:justify-center my-2'>
                         <span
                           className="w-full md:w-[300px] text-center font-semibold leading-tight cursor-pointer" onClick={() => handleStatusChange(nextStatus(user.status), user.code)}>
                           <span aria-hidden
@@ -198,7 +198,7 @@ export default function Dashboard() {
                         {user.status === 'finished' &&
                          <button onClick={() => handleSendMessageWpp(user.phone, user)} className='flex items-center gap-2 border-green-500 border-2 rounded-md px-2 py-2'>
                           <WhatsappLogo size={20}/>
-                          Notificar no Whatsapp
+                          <span className="sr-only md:not-sr-only"> Notificar no Whatsapp </span>
                         </button>}
                       </div>
 
