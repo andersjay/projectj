@@ -15,6 +15,7 @@ model User {
   id        String   @id @default(uuid())
   name      String
   plate     String
+  phone     String?
   code      String   @default(uuid())
   status    String   @default("waiting")
   createdAt DateTime @default(now())

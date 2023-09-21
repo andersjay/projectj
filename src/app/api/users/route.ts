@@ -6,7 +6,10 @@ import dayjs from 'dayjs'
 
 export async function POST(request: Request) {
 
-    const { name, plate } = await request.json()
+    const { name, plate, phone } = await request.json()
+
+    const phoneReplaced = phone.replace(/\D/g, '') // Remove caracteres não numéricos
+    const phoneFormatted = `+55${phoneReplaced}` // Adiciona o código do Brasil
 
     const generateRandomCode = () => {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; // Caracteres permitidos
@@ -23,6 +26,7 @@ export async function POST(request: Request) {
             id: uuidv4(),
             name,
             code: generateRandomCode(),
+            phone: phoneFormatted,
             plate,
             status: 'waiting',
             createdAt: dayjs().toDate(),
